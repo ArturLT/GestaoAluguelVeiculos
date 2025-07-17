@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import Entidades.CarRental;
 import Entidades.Veiculo;
+import servicos.ServicoLocacao;
+import servicos.TaxaBrasileira;
 
 public class Main {
 	
@@ -26,5 +28,19 @@ public class Main {
 		LocalDateTime finish = LocalDateTime.parse(sc.nextLine(), fmt);
 		
 		CarRental cr = new CarRental(start, finish, new Veiculo(carModelo));
+		
+		System.out.print("Entre com o preço por hora:");
+		double precoPorHora = sc.nextDouble();
+		System.out.print("Entre com o preço por dia:");
+		double precoPorDia = sc.nextDouble();
+		
+		ServicoLocacao sl = new ServicoLocacao(precoPorHora, precoPorDia, new TaxaBrasileira());
+		
+		sl.procesoBoleto(cr);
+		
+		System.out.println("Fatura:");
+		System.out.println("Pagamento Basico: " + cr.getBoleto().getPagamentoInic());
+		System.out.println("Imposto: " + cr.getBoleto().getTaxa());
+		System.out.println("Pagamento toal: " + cr.getBoleto().pagemtnoTotal());
 	}
 }

@@ -32,6 +32,6 @@ public class Boleto {
 	}
 	
 	public Double pagemtnoTotal() {
-		return getPagamentoInic() - getTaxa();
+		return getPagamentoInic() + getTaxa();
 	}
 }
